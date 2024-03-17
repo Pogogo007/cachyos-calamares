@@ -60,11 +60,14 @@ unmountTargetMounts( const QString& rootMountPoint )
 
     using MtabInfo = Calamares::Partition::MtabInfo;
     auto targetMounts = MtabInfo::fromMtabFilteredByPrefix( targetMountPath );
+    for ( const auto& m : qAsConst( targetMounts ) ){
+        cDebug() << "Entry--" << m.mountPoint;
+    }
     std::sort( targetMounts.begin(), targetMounts.end(), MtabInfo::mountPointOrder );
 
     cDebug() << "Read" << targetMounts.count() << "entries from" << targetMountPath;
     for ( const auto& m : qAsConst( targetMounts ) ){
-        cDebug() << "Entry--" << m.mountPoint;
+        cDebug() << "EntryAfterSort--" << m.mountPoint;
     }
     for ( const auto& m : qAsConst( targetMounts ) )
     {
