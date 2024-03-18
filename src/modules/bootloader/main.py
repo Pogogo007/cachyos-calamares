@@ -825,7 +825,8 @@ def install_refind(efi_directory):
     kernel_params = " ".join(get_kernel_params(uuid))
     conf_path = os.path.join(installation_root_path, "boot/refind_linux.conf")
 
-    check_target_env_call(["refind-install"])
+    subprocess.call([f"refind-install --root {installation_root_path}"])
+    #check_target_env_call(["refind-install"])
 
     with open(conf_path, "r") as refind_file:
         filedata = [x.strip() for x in refind_file.readlines()]
